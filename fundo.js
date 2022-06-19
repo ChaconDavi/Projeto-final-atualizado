@@ -4,33 +4,46 @@ var options = {
   particleColor: "rgba(255,0,0)",
   lineColor: "rgba(255,0,0,0.3)",
   particleAmount: 125,
-  defaultRadius: .4,
+  defaultRadius: 0.4,
   variantRadius: 4,
-  defaultSpeed: .7,
-  variantSpeed: .7,
-  linkRadius: 180
+  defaultSpeed: 0.7,
+  variantSpeed: 0.7,
+  linkRadius: 180,
 };
 
 var rgb = options.lineColor.match(/\d+/g);
 
 document.addEventListener("DOMContentLoaded", init);
 
+window.addEventListener("resize", resizeReset);
+
 function init() {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   resizeReset();
-  initialiseElements();
   startAnimation();
 }
 
 function resizeReset() {
+  const numberOfParticles = getNumberOfParticles();
+
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
+
+  initialiseElements(numberOfParticles);
 }
 
-function initialiseElements() {
+const getNumberOfParticles = () => {
+  if (window.innerWidth < 1000) {
+    return 50;
+  }
+
+  return 125;
+};
+
+function initialiseElements(numberOfParticles) {
   particles = [];
-  for (var i = 0; i < options.particleAmount; i++) {
+  for (var i = 0; i < numberOfParticles; i++) {
     particles.push(new Particle());
   }
 }
@@ -40,7 +53,7 @@ function startAnimation() {
 }
 
 function animationLoop() {
-  ctx.clearRect(0,0,w,h);
+  ctx.clearRect(0, 0, w, h);
   drawScene();
 
   id = requestAnimationFrame(animationLoop);
@@ -69,8 +82,8 @@ function linkPoints(point, hubs) {
     var distance = checkDistance(point.x, point.y, hubs[i].x, hubs[i].y);
     var opacity = 1 - distance / options.linkRadius;
     if (opacity > 0) {
-      ctx.lineWidth = 0,5;
-     ctx.strokeStyle = 'rgba(255, 0, 0,'+opacity+')';
+      (ctx.lineWidth = 0), 5;
+      ctx.strokeStyle = "rgba(255, 0, 0," + opacity + ")";
       ctx.beginPath();
       ctx.moveTo(point.x, point.y);
       ctx.lineTo(hubs[i].x, hubs[i].y);
@@ -84,7 +97,7 @@ function checkDistance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
-Particle = function() {
+Particle = function () {
   var _this = this;
 
   _this.x = Math.random() * w;
@@ -95,16 +108,16 @@ Particle = function() {
   _this.directionAngle = Math.floor(Math.random() * 100);
   _this.vector = {
     x: Math.cos(_this.directionAngle) * _this.speed,
-    y: Math.sin(_this.directionAngle) * _this.speed
-  }
+    y: Math.sin(_this.directionAngle) * _this.speed,
+  };
 
-  _this.update = function() {
+  _this.update = function () {
     _this.border();
     _this.x += _this.vector.x;
     _this.y += _this.vector.y;
-  }
+  };
 
-  _this.border = function() {
+  _this.border = function () {
     if (_this.x >= w || _this.x <= 0) {
       _this.vector.x *= -1;
     }
@@ -115,13 +128,13 @@ Particle = function() {
     if (_this.y > h) _this.y = h;
     if (_this.x < 0) _this.x = 0;
     if (_this.y < 0) _this.y = 0;
-  }
+  };
 
-  _this.draw = function() {
+  _this.draw = function () {
     ctx.beginPath();
     ctx.arc(_this.x, _this.y, _this.radius, 0, Math.PI * 10);
     ctx.closePath();
     ctx.fillStyle = _this.color;
     ctx.fill();
-  }
-}
+  };
+};

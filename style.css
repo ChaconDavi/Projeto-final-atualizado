@@ -1,165 +1,131 @@
-body{
-    margin: 0;
+* {
+  box-sizing: border-box;
 }
 
-body *{
-    box-sizing: border-box;
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+  height: 100vh;
 }
 
-
-.video-fundo{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    background-size: 100%;
-    z-index: -100;
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  background-color: white;
 }
 
-
-.main-login{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0px 70px 20px 70px;
 }
 
-.left-login{
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.main__images {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-.left-login-image{
-    font-size: 3vw;
-    width: 25vw;
+.logo-tele {
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  max-width: 500px;
 }
 
-.logo-tele{
-    font-size: 3vw;
-    width: 25vw;
-}
-
-
-.right-login{
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-login{
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px 35px;
-    background:#3c5295;
-    border-radius: 20px;
-    box-shadow: 0px 10px 40px #000000 ;
+.card-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 300px;
+  padding: 30px 35px;
+  background: #3c5295;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #000000;
 }
 
 .card-login > h1 {
-    font-weight: bold;
-    color: #ffffff;
-    font-weight: 800;
-    margin: 0;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: 800;
+  margin: 0;
 }
 
-.textfield{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 10px 0px;
+.textfield {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px 0px;
 }
 
-.textfield >input{
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    background:#ffffff;
-    font-size: 12pt;
-    box-shadow:0px 10px 40px #000000;
-    outline: none;
-    box-sizing: border-box;
+.textfield > input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #ffffff;
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px #000000;
+  outline: none;
+  box-sizing: border-box;
 }
 
-.textfield > label{
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffffff;
+.textfield > label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
-.textfield > input::placeholder{
-    color: #000000;
+.textfield > input::placeholder {
+  color: #000000;
 }
 
-.btn-login{
-    width: 100%;
-    padding: 16px 0px;
-    margin: 25px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
-    background:#ffffff;
-    cursor: pointer;
-    box-shadow: 0px 10px 40px -12px #000000;
+.btn-login {
+  width: 100%;
+  padding: 16px 0px;
+  margin: 25px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px #000000;
 }
 
-
-.btn-cadastro{
-    font-weight: bold;
-    color: #ffffff;
+.btn-cadastro {
+  font-weight: bold;
+  color: #ffffff;
 }
 
 .btn-cadastro > a {
-    font-weight: bold;
-    color: #ffffff;
+  font-weight: bold;
+  color: #ffffff;
 }
 
+@media (max-width: 950px) {
+  .main {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-@media only screen and (max-width: 950px){
-    .card-login{
-        width: 85%
-    }
-    .logo-tele{
-        width: 90%;
-    }
+  .persons-image {
+    display: none;
+  }
 }
-
-@media only screen and (max-width: 600px){
-    .main-login{
-        flex-direction: column;
-    }
-    .left-login{
-        width: 100%;
-        height: auto;
-    }
-    .right-login{
-        width: 100%;
-        height: auto;
-    }
-    .left-login-image{
-        display: none;
-    }
-    .card-login{
-        width: 90%;
-    }
-}
-
-
